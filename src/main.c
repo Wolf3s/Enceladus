@@ -25,10 +25,8 @@
 #include <fileXio_rpc.h>
 #include <fileio.h>
 
-extern "C"{
 #include <libds34bt.h>
 #include <libds34usb.h>
-}
 
 extern char bootString[];
 extern unsigned int size_bootString;

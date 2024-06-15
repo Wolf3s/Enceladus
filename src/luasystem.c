@@ -383,7 +383,7 @@ static int lua_exit(lua_State *L)
 {
 	int argc = lua_gettop(L);
 	if (argc != 0) return luaL_error(L, "System.exitToBrowser");
-	asm volatile(
+	__asm__ volatile(
             "li $3, 0x04;"
             "syscall;"
             "nop;"
@@ -624,7 +624,7 @@ struct pathMap {
 
 static int copyThread(void* data)
 {
-	pathMap* paths = (pathMap*)data;
+	struct pathMap* paths = (struct pathMap*)data;
 
     char buffer[BUFSIZE];
     int in = open(paths->in, O_RDONLY, 0);
@@ -657,7 +657,7 @@ static int lua_copyasync(lua_State *L){
 	int argc = lua_gettop(L);
 	if (argc != 2) return luaL_error(L, "wrong number of arguments");
 
-	pathMap* copypaths = (pathMap*)malloc(sizeof(pathMap));
+	struct pathMap* copypaths = (struct pathMap*)malloc(sizeof(struct pathMap));
 
 	copypaths->in = luaL_checkstring(L, 1);
 	copypaths->out = luaL_checkstring(L, 2);
@@ -775,7 +775,7 @@ static const luaL_Reg Sif_functions[] = {
 	{0, 0}
 };
 
-void luaSystem_init(lua_State *L) {
+void luaSystem_init(struct lua_State *L) {
 
 	lua_register(L, "doesFileExist", lua_checkexist);
 

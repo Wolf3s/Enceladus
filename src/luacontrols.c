@@ -1,10 +1,8 @@
 #include "include/luaplayer.h"
 #include "include/pad.h"
 #include <stdint.h>
-extern "C"{
 #include <libds34bt.h>
 #include <libds34usb.h>
-}
 
 static int lua_gettype(lua_State *L) {
 	int argc = lua_gettop(L);
@@ -28,7 +26,7 @@ static int lua_getpad(lua_State *L) {
 		if (port > 1) return luaL_error(L, "wrong port number.");
 	}
 
-	padButtonStatus buttons;
+	struct padButtonStatus buttons;
 	u32 paddata = 0;
 	int ret;
 
@@ -69,7 +67,7 @@ static int lua_getleft(lua_State *L){
 		if (port > 1) return luaL_error(L, "wrong port number.");
 	}
 
-	padButtonStatus buttons;
+	struct padButtonStatus buttons;
 
 	int state = padGetState(port, 0);
 
@@ -91,7 +89,7 @@ static int lua_getright(lua_State *L){
 		if (port > 1) return luaL_error(L, "wrong port number.");
 	}
 
-	padButtonStatus buttons;
+	struct padButtonStatus buttons;
 
 	int state = padGetState(port, 0);
 
@@ -116,7 +114,7 @@ static int lua_getpressure(lua_State *L){
 		button = luaL_checkinteger(L, 1);
 	}
 	
-	padButtonStatus pad;
+	struct padButtonStatus pad;
 
 	unsigned char pressure = 255;
 
@@ -241,7 +239,7 @@ static const luaL_Reg Pads_functions[] = {
   {0, 0}
 };
 
-void luaControls_init(lua_State *L) {
+void luaControls_init(struct lua_State *L) {
 	lua_newtable(L);
 	luaL_setfuncs(L, Pads_functions, 0);
 	lua_setglobal(L, "Pads");

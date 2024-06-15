@@ -215,7 +215,7 @@ static const luaL_Reg Color_functions[] = {
   {0, 0}
 };
 
-void luaScreen_init(lua_State *L) {
+void luaScreen_init(struct lua_State *L) {
 	lua_newtable(L);
 	luaL_setfuncs(L, Screen_functions, 0);
 	lua_setglobal(L, "Screen");

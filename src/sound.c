@@ -4,6 +4,14 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#if !(__STDC__)
+#define bool unsigned char
+#define true 1
+#define false 0
+#elif (__STDC_VERSION__ >= 199901L) || !(__STDC_VERSION__ >= 202311L )
+#include <stdbool.h>
+#endif
+
 #include "include/sound.h"
 
 static bool adpcm_started = false;

@@ -541,7 +541,7 @@ static const luaL_Reg Graphics_functions[] = {
 };
 
 
-void luaGraphics_init(lua_State *L) {
+void luaGraphics_init(struct lua_State *L) {
 
     lua_newtable(L);
 	luaL_setfuncs(L, Graphics_functions, 0);

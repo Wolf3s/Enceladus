@@ -87,7 +87,7 @@ static const luaL_Reg Keyboard_functions[] = {
   {0, 0}
 };
 
-void luaKeyboardInit(lua_State *L){
+void luaKeyboardInit(struct lua_State *L){
 	lua_newtable(L);
 	luaL_setfuncs(L, Keyboard_functions, 0);
 	lua_setglobal(L, "Keyboard");
