@@ -52,14 +52,13 @@ EE_INCS += -I$(PS2DEV)/gsKit/include -I$(PS2SDK)/ports/include -I$(PS2SDK)/ports
 EE_INCS += -Imodules/ds34bt/ee -Imodules/ds34usb/ee
 
 EE_CFLAGS   += -Wno-sign-compare -fno-strict-aliasing -fno-exceptions -DLUA_USE_PS2 -Dasm=__asm__
-EE_CXXFLAGS += -Wno-sign-compare -fno-strict-aliasing -fno-exceptions -DLUA_USE_PS2
 
 ifeq ($(RESET_IOP),1)
-EE_CXXFLAGS += -DRESET_IOP
+EE_CFLAGS += -DRESET_IOP
 endif
 
 ifeq ($(DEBUG),1)
-EE_CXXFLAGS += -DDEBUG
+EE_CFLAGS += -DDEBUG
 endif
 
 
@@ -84,7 +83,7 @@ IOP_MODULES = iomanX.o fileXio.o \
 EMBEDDED_RSC = boot.o
 
 ifeq ($(F_KEYBOARD),1)
-  EE_CXXFLAGS += -DPS2KBD
+  EE_CFLAGS += -DPS2KBD
   EE_LIBS += -lkbd
   IOP_MODULES += ps2kbd.o
   LUA_LIBS +=  luaKeyboard.o
@@ -178,10 +177,6 @@ $(EE_OBJS_DIR)%.o: $(EE_SRC_DIR)%.c | $(EE_OBJS_DIR)
 $(EE_OBJS_DIR)%.o: $(EE_ASM_DIR)%.c | $(EE_OBJS_DIR)
 	@echo "  - $@"
 	@$(EE_CC) $(EE_CFLAGS) $(EE_INCS) -c $< -o $@
-
-$(EE_OBJS_DIR)%.o: $(EE_SRC_DIR)%.cpp | $(EE_OBJS_DIR)
-	@echo "  - $@"
-	$(EE_CXX) $(EE_CXXFLAGS) $(EE_INCS) -c $< -o $@
 
 include $(PS2SDK)/samples/Makefile.pref
 include $(PS2SDK)/samples/Makefile.eeglobal

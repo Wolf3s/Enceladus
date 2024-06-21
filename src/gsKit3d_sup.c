@@ -64,7 +64,6 @@ void gsKit_prim_triangle_goraud_texture_3d_st(
     u64 color1, u64 color2, u64 color3
 ) {
     gsKit_set_texfilter(gsGlobal, Texture->Filter);
-    u64* p_store;
     u64* p_data;
     const int qsize = 6;
     const int bsize = 96;
@@ -83,7 +82,7 @@ void gsKit_prim_triangle_goraud_texture_3d_st(
     TexCoord st2 = (TexCoord) { { u2, v2 } };
     TexCoord st3 = (TexCoord) { { u3, v3 } };
 
-    p_store = p_data = (u64*)gsKit_heap_alloc(gsGlobal, qsize, bsize, GSKIT_GIF_PRIM_TRIANGLE_TEXTURED);
+    p_data = (u64*)gsKit_heap_alloc(gsGlobal, qsize, bsize, GSKIT_GIF_PRIM_TRIANGLE_TEXTURED);
 
     *p_data++ = GIF_TAG_TRIANGLE_GORAUD_TEXTURED(0);
     *p_data++ = GIF_TAG_TRIANGLE_GORAUD_TEXTURED_ST_REGS(gsGlobal->PrimContext);
@@ -170,7 +169,6 @@ void gsKit_prim_triangle_goraud_texture_3d_st_fog(
     u8 fog1, u8 fog2, u8 fog3
 ) {
     gsKit_set_texfilter(gsGlobal, Texture->Filter);
-    u64* p_store;
     u64* p_data;
     int qsize = 6;
     int bsize = 96;
@@ -189,7 +187,7 @@ void gsKit_prim_triangle_goraud_texture_3d_st_fog(
     TexCoord st2 = (TexCoord) { { u2, v2 } };
     TexCoord st3 = (TexCoord) { { u3, v3 } };
 
-    p_store = p_data = (u64*)gsKit_heap_alloc(gsGlobal, qsize, bsize, GSKIT_GIF_PRIM_TRIANGLE_TEXTURED);
+    p_data = (u64*)gsKit_heap_alloc(gsGlobal, qsize, bsize, GSKIT_GIF_PRIM_TRIANGLE_TEXTURED);
 
     *p_data++ = GIF_TAG_TRIANGLE_GORAUD_TEXTURED(0);
     *p_data++ = GIF_TAG_TRIANGLE_GORAUD_TEXTURED_ST_FOG_REGS(gsGlobal->PrimContext);

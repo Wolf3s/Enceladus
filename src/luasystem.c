@@ -383,7 +383,7 @@ static int lua_exit(lua_State *L)
 {
 	int argc = lua_gettop(L);
 	if (argc != 0) return luaL_error(L, "System.exitToBrowser");
-	__asm__ volatile(
+	asm volatile(
             "li $3, 0x04;"
             "syscall;"
             "nop;"
